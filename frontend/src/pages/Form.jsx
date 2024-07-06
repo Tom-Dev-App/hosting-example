@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-// import "dotenv/config";
 
 const Form = () => {
   const [image, setImage] = useState(null);
@@ -13,12 +12,15 @@ const Form = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Create FormData object and append image file
     const formData = new FormData();
-    formData.append("image", image);
+    formData.append("photo", image);
 
     try {
+      // Send POST request to upload image
       const response = await axios.post(
-        `${import.meta.env.VITE_APP_SERVER_URL}/file`,
+        `${import.meta.env.VITE_APP_SERVER_URL}/file/upload`,
         formData,
         {
           headers: {
@@ -26,10 +28,13 @@ const Form = () => {
           },
         }
       );
+
+      // Handle successful upload
       setMessage("Image uploaded successfully!");
     } catch (error) {
+      // Handle upload error
       console.error("Error uploading image:", error);
-      setMessage("Error uploading image");
+      setMessage("Error uploading image: " + error.message);
     }
   };
 

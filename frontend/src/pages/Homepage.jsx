@@ -8,9 +8,17 @@ const Homepage = () => {
       <section>
         <div
           className="d-flex justify-content-center align-items-center text-center"
-          style={{ height: "50rem" }}>
+          style={{ height: "50rem" }}
+        >
           <div>
             <h1>Welcome to Celerates</h1>
+            <div>
+              <img
+                src="/logo.png"
+                class="img-fluid w-75"
+                alt="CELERATES LOGO"
+              />
+            </div>
             <p>Improve your productivity with simplicity</p>
           </div>
         </div>
