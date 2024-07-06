@@ -3,7 +3,7 @@ import "dotenv/config";
 // APP
 export const BASE_URL = process.env.BASE_URL ?? "localhost";
 export const BASE_PORT = process.env.BASE_PORT ?? 8000;
-
+export const PROD_URL = process.env.PROD_URL ?? false;
 // DATABASE
 export const DB_HOST = process.env.DATABASE_HOST ?? "localhost";
 
