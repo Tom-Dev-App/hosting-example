@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-import { BASE_URL, BASE_PORT } from "./config.mjs";
+import { BASE_URL, BASE_PORT, PROD_URL } from "./config.mjs";
 import routes from "./routes.mjs";
 
 app.use(`/public/images`, express.static("public/images"));
@@ -26,5 +26,9 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: "Something went wrong", error: err.message });
 });
 app.listen(BASE_PORT, () => {
-  console.log(`server is starting on http://${BASE_URL}:${BASE_PORT}/`);
+  console.log(
+    `server is starting on ${
+      PROD_URL ? PROD_URL : "http:" + BASE_URL + ":" + BASE_PORT + "/"
+    }`
+  );
 });

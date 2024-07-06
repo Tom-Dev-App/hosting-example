@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 import db from "./database.mjs";
 import crypto from "crypto";
-
+import { BASE_PORT, BASE_URL, PROD_URL } from "./config.mjs";
 // Function to generate a random string
 const generateRandomString = (length) => {
   return crypto.randomBytes(length).toString("hex");
@@ -54,9 +54,16 @@ export const uploadPhoto = async (req, res) => {
 
     const { filename } = req.file;
     const filedir = req.file.destination;
-    const fileurl = `${req.protocol}://${req.get(
-      "host"
-    )}/${filedir}${filename}`;
+    // BELOW FOR DEVELOPMENT ENV
+    // const fileurl = `${req.protocol}://${req.get(
+    //   "host"
+    // )}/${filedir}${filename}`;
+
+    // FOR PRODUCTIONS
+    const fileurl = `${
+      PROD_URL ? PROD_URL : BASE_URL + ":" + BASE_PORT
+    }/${filedir}${filename}`;
+
     const userFilename = req.body.filename || filename;
 
     try {
